@@ -1,0 +1,13 @@
+{
+  "ui": {
+    "basePath": "/",
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "lockedUser": "locked_out_user"
+  },
+  "api": {
+    "baseUrl": "https://reqres.in/api",
+    "email": "eve.holt@reqres.in",
+    "password": "cityslicka"
+  }
+}

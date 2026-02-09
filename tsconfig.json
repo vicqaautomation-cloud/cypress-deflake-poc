@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM"],
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "types": ["cypress", "node"],
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "checkJs": false,
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "baseUrl": "."
+  },
+  "include": [
+    "cypress/**/*.ts",
+    "support/**/*.ts",
+    "support/**/*.d.ts",
+    "pages/**/*.ts",
+    "actions/**/*.ts",
+    "components/**/*.ts",
+    "api/**/*.ts",
+    "config/**/*.json"
+  ],
+  "exclude": ["node_modules"]
+}
