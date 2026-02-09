@@ -40,6 +40,9 @@ npm run api
 npm run regression
 ```
 
+## POC test catalog
+- `docs/poc-test-cases.md`
+
 ## Environment selection
 By default tests use `dev`. You can override with `TEST_ENV`:
 ```bash

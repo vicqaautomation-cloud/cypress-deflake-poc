@@ -25,4 +25,8 @@ interface ReqresCreateUserResponse {
   createdAt: string;
 }
 
-export type { ReqresLoginResponse, ReqresUsersResponse, ReqresCreateUserResponse };
+interface ReqresErrorResponse {
+  error: string;
+}
+
+export type { ReqresLoginResponse, ReqresUsersResponse, ReqresCreateUserResponse, ReqresErrorResponse };

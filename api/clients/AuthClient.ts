@@ -1,4 +1,9 @@
-import type { ReqresCreateUserResponse, ReqresLoginResponse, ReqresUsersResponse } from '../schemas/login.schema';
+import type {
+  ReqresCreateUserResponse,
+  ReqresErrorResponse,
+  ReqresLoginResponse,
+  ReqresUsersResponse,
+} from '../schemas/login.schema';
 
 class AuthClient {
   private readonly baseUrl: string;
@@ -16,6 +21,18 @@ class AuthClient {
     });
   }
 
+  // Sends login payload and can validate error status responses.
+  loginWithPayload(
+    payload: Partial<{ email: string; password: string }>
+  ): Cypress.Chainable<Cypress.Response<ReqresLoginResponse | ReqresErrorResponse>> {
+    return cy.request<ReqresLoginResponse | ReqresErrorResponse>({
+      method: 'POST',
+      url: `${this.baseUrl}/login`,
+      body: payload,
+      failOnStatusCode: false,
+    });
+  }
+
   // Retrieves paginated user data.
   listUsers(page: number = 2): Cypress.Chainable<Cypress.Response<ReqresUsersResponse>> {
     return cy.request<ReqresUsersResponse>({
@@ -30,6 +47,15 @@ class AuthClient {
       method: 'POST',
       url: `${this.baseUrl}/users`,
       body: { name, job },
+    });
+  }
+
+  // Gets a single user by id and keeps control on 404 checks for negative tests.
+  getUser(userId: number): Cypress.Chainable<Cypress.Response<Record<string, unknown>>> {
+    return cy.request<Record<string, unknown>>({
+      method: 'GET',
+      url: `${this.baseUrl}/users/${userId}`,
+      failOnStatusCode: false,
     });
   }
 }

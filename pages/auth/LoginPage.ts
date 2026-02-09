@@ -21,6 +21,11 @@ class LoginPage extends BasePage {
     this.click(LoginSelectors.submitButton);
   }
 
+  // Submits login form without filling credentials.
+  submit(): void {
+    this.click(LoginSelectors.submitButton);
+  }
+
   // Uses environment credentials for the happy path login.
   loginAsStandardUser(): void {
     const { username, password } = Cypress.env('ui');

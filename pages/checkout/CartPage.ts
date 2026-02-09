@@ -3,15 +3,22 @@ import BasePage from '../base/BasePage';
 // Selectors used in product list/cart pages.
 const CartSelectors = {
   productByName: (name: string) => `[data-test="add-to-cart-${name}"]`,
+  removeByName: (name: string) => `[data-test="remove-${name}"]`,
   cartLink: '[data-test="shopping-cart-link"]',
   checkoutButton: '[data-test="checkout"]',
   cartBadge: '[data-test="shopping-cart-badge"]',
+  inventoryItem: '.inventory_item',
 };
 
 class CartPage extends BasePage {
   // Adds one product from inventory view using its slug.
   addProductToCart(productSlug: string): void {
     this.click(CartSelectors.productByName(productSlug));
+  }
+
+  // Removes one product from inventory view using its slug.
+  removeProductFromCart(productSlug: string): void {
+    this.click(CartSelectors.removeByName(productSlug));
   }
 
   // Opens cart details.
@@ -27,6 +34,11 @@ class CartPage extends BasePage {
   // Verifies cart item counter in header.
   assertItemsInCart(quantity: number): void {
     cy.get(CartSelectors.cartBadge).should('have.text', String(quantity));
+  }
+
+  // Validates number of items visible in cart detail page.
+  assertCartLineItems(quantity: number): void {
+    cy.get(CartSelectors.inventoryItem).should('have.length', quantity);
   }
 }
 

@@ -6,8 +6,10 @@ const PaymentSelectors = {
   lastName: '[data-test="lastName"]',
   postalCode: '[data-test="postalCode"]',
   continueButton: '[data-test="continue"]',
+  cancelButton: '[data-test="cancel"]',
   finishButton: '[data-test="finish"]',
   completeHeader: '[data-test="complete-header"]',
+  errorMessage: '[data-test="error"]',
 };
 
 interface CheckoutUser {
@@ -30,9 +32,19 @@ class PaymentPage extends BasePage {
     this.click(PaymentSelectors.finishButton);
   }
 
+  // Leaves checkout flow and returns to cart.
+  cancelCheckout(): void {
+    this.click(PaymentSelectors.cancelButton);
+  }
+
   // Validates the expected completion message.
   assertOrderCompleted(): void {
     this.contains(PaymentSelectors.completeHeader, 'Thank you for your order!');
+  }
+
+  // Validates required-field errors in checkout step one.
+  assertCheckoutError(expectedMessage: string): void {
+    this.contains(PaymentSelectors.errorMessage, expectedMessage);
   }
 }
 
